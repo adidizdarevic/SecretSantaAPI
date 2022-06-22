@@ -70,12 +70,6 @@ namespace SecretSantaAPI.Controllers
                 // remove x and then next
                 xList.RemoveAt(xPosition);
 
-                System.Diagnostics.Debug.WriteLine("\nPairs id's x:" + par.X + "- y:" + par.Y);
-                System.Diagnostics.Debug.WriteLine("X list: ");
-                xList.ForEach(i => System.Diagnostics.Debug.Write(i.Id + ","));
-                System.Diagnostics.Debug.WriteLine("\nY list: ");
-                yList.ForEach(i => System.Diagnostics.Debug.Write(i.Id + ","));
-
             }
 
             await _context.SaveChangesAsync();
