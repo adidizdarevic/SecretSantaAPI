@@ -13,8 +13,6 @@ const Login = () => {
     const validPw = async (e) => {
         e.preventDefault();
         const user = { username, password };
-        console.log("Uslo");
-        console.log(JSON.stringify(user));
 
         fetch("https://localhost:5001/api/authentication", {
             method: 'POST',
@@ -30,36 +28,26 @@ const Login = () => {
                     throw Error("Is not in db");
                 }
                 document.cookie = 'jwt=${token};max-age=604800;domain=';
-                console.log("Ovo je vraceno:");
-                console.log(data);
-                console.log("token: ");
-                console.log(token);
                 if (data !== "Error") {
                     fetch("https://localhost:5001/api/authentication/getUserDTOFromToken/" + token)
                         .then(response => response.json())
                         .then(data => {
-                            console.log("Data je ");
-                            console.log(data);
                             const user = data;
-                            console.log("USER JE:");
-                            console.log(user.item1);
                             if (data !== "Error") {
-                                console.log("OVDJE REDIRECT");
                                 if (user.item2 === "Admin") {
                                     navigate("../admin-home", { state: { user: user.item1 } });
                                 } else {
                                     navigate("../home", { state: { user: user.item1 } });
                                 }
-
                             }
                         }).catch(function (error) {
-                            console.log("GRESKA");
+                            console.log("ERROR FETCHING USER FROM TOKEN");
                             console.log(error);
                         });
                 } else alert("Wrong username or password!");
             }).catch(function (error) {
-                console.log(error)
-                alert("Wrong log in information");
+                console.log(error);
+                alert("Wrong username or password!");
             });
     }
 

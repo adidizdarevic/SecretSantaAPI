@@ -27,6 +27,39 @@ namespace SecretSantaAPI.Controllers
             return Ok(await _context.PairModels.ToListAsync());
         }
 
+        [Authorize(Roles = "Admin")]
+        [HttpGet("personWithoutPair")]
+        public async Task<ActionResult<List<PairModel>>> GetPersonWithouPair()
+        {
+            var pairs = await _context.PairModels.ToListAsync();
+            var users = await _context.UserModels.ToListAsync();
+
+            List<int> listPairs = new List<int>();
+            List<int> listUsers = new List<int>();
+
+            foreach (var pair in pairs)
+            {   
+                listPairs.Add(pair.X);
+            }
+            foreach (var user in users){
+                listUsers.Add(user.Id);
+            }
+
+            for(int i = 0; i < listUsers.Count; i++)
+            {
+                for(int j = 0; j < listPairs.Count; j++)
+                {
+                    if (listUsers[i] == listPairs[j]) break;
+                    else if(j == listPairs.Count-1)
+                    {
+                        return Ok(await _context.UserModels.FindAsync(listUsers[i]));
+                    }
+                }
+            }
+            // everyone has pair
+            return Ok("");
+        }
+
         // returns paired user y for user x
         [Authorize(Roles = "Admin,User")]
         [HttpGet("{x}")]

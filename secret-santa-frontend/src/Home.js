@@ -1,6 +1,6 @@
 import './home.css';
-import { useState, useEffect, useContext } from 'react';
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useState, useEffect } from 'react';
+import { useLocation, useNavigate } from "react-router-dom";
 
 const Home = () => {
 
@@ -13,8 +13,6 @@ const Home = () => {
     }
 
     useEffect(() => {
-        console.log("Kaze ovdje user je");
-        console.log(location.state.user);
         fetch("https://localhost:5001/api/UserModels/byUsername/" + location.state.user, {
             method: 'GET',
             headers: {
@@ -23,8 +21,6 @@ const Home = () => {
             }
         }).then(response => response.json())
             .then(data => {
-                console.log("Ovo je vraceno:");
-                console.log(data.id);
                 fetch("https://localhost:5001/api/PairModels/" + data.id, {
                     method: 'GET',
                     headers: {
@@ -34,16 +30,15 @@ const Home = () => {
                 })
                     .then(response => response.json())
                     .then(data => {
-                        console.log("Korisnik za preuzeti ");
-                        console.log(data);
-                        setPerson(data.username);
+                        if (data === 0) setPerson("No person for you :(")
+                        else setPerson(data.username);
                     }).catch(function (error) {
-                        console.log("GRESKA");
+                        console.log("ERROR FETCHING Y FOR X");
                         console.log(error);
                     });
             }).catch(function (error) {
                 console.log(error)
-                alert("Neka sklj greska");
+                alert("ERROR FETCHING USER BY USERNAME");
             });
     }, []);
 
