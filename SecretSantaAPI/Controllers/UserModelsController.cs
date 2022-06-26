@@ -40,6 +40,7 @@ namespace SecretSantaAPI.Controllers
             if (user == null) return BadRequest("0");
 
             return Ok(user);
+
         }
         [HttpPost]
         public async Task<ActionResult<List<UserModel>>> AddUser(UserModel user)
