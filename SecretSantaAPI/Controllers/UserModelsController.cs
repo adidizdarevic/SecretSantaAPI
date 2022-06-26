@@ -7,6 +7,8 @@ using SecretSantaAPI.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System;
+using System.Text;
+using System.Security.Cryptography;
 
 namespace SecretSantaAPI.Controllers
 {
@@ -42,6 +44,10 @@ namespace SecretSantaAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<List<UserModel>>> AddUser(UserModel user)
         {
+            var sha = SHA256.Create();
+
+            var pwHash = Encoding.ASCII.GetString(sha.ComputeHash(Encoding.ASCII.GetBytes(user.Password)));
+            user.Password = pwHash;
             _context.UserModels.Add(user);
             await _context.SaveChangesAsync();
             return Ok(await _context.UserModels.ToListAsync());

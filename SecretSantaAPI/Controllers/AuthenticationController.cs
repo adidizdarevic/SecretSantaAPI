@@ -118,14 +118,6 @@ namespace SecretSantaAPI.Controllers
         [HttpGet("CreateFirstData")]
         public async Task<ActionResult<UserModel>> CreateFirstData()
         {
-            if (!_context.RoleModels.Any())
-            {
-                RoleModel admin = new RoleModel("Admin");
-                RoleModel user = new RoleModel("User");
-
-                _context.RoleModels.Add(admin);
-                _context.RoleModels.Add(user);
-            }
             await _context.SaveChangesAsync();
             
             if (!_context.UserModels.Any())
@@ -136,12 +128,13 @@ namespace SecretSantaAPI.Controllers
 
                 var pwHash2 = Encoding.ASCII.GetString(sha.ComputeHash(Encoding.ASCII.GetBytes("userpw")));
 
-                UserModel admin = new UserModel("Admin", pwHash1, "Admin");
+                
                 UserModel user1 = new UserModel("User1", pwHash2, "User");
                 UserModel user2 = new UserModel("User2", pwHash2, "User");
                 UserModel user3 = new UserModel("User3", pwHash2, "User");
                 UserModel user4 = new UserModel("User4", pwHash2, "User");
                 UserModel user5 = new UserModel("User5", pwHash2, "User");
+                UserModel admin = new UserModel("Admin", pwHash1, "Admin");
 
                 _context.UserModels.Add(admin);
                 _context.UserModels.Add(user1);

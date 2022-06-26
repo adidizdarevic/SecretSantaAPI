@@ -9,7 +9,7 @@ using SecretSantaAPI.Data;
 namespace SecretSantaAPI.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20220625095013_initial")]
+    [Migration("20220626191518_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

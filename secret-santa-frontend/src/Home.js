@@ -9,7 +9,7 @@ const Home = () => {
     const location = useLocation();
 
     const logout = async () => {
-        navigate("../login", { replace: true });
+        navigate("../", { replace: true });
     }
 
     useEffect(() => {
