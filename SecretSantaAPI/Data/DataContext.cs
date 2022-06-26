@@ -9,5 +9,7 @@ namespace SecretSantaAPI.Data
         public DbSet<UserModel> UserModels { get; set; }
         public DbSet<RoleModel> RoleModels { get; set; }
         public DbSet<PairModel> PairModels { get; set; }
+
+        //protected override void OnConfiguring(DbContextOptionsBuilder dbContextOptionsBuilder) => dbContextOptionsBuilder.UseSqlServer()
     }
 }

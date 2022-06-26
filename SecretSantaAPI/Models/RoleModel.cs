@@ -17,7 +17,7 @@ namespace SecretSantaAPI.Models
     }
     public enum RoleType
     {
-        Admin = 0,
-        User = 1
+        Admin = 1,
+        User = 2
     }
 }

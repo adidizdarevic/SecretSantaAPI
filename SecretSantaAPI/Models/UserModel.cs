@@ -4,16 +4,23 @@ namespace SecretSantaAPI.Models
 {
     public class UserModel
     {
-        public UserModel(string userName, string password, string roleName)
+        public UserModel(string username, string passwordHash)
         {
-            UserName = userName;
-            Password = password;
-            RoleName = roleName;
+            Username = username;
+            Password = passwordHash;
+            RoleName = "User";
+        }
+        public UserModel(string username, string passwordHash, string role)
+        {
+            Username = username;
+            Password = passwordHash;
+            RoleName = role;
         }
 
+        public UserModel() { }
         [Key]
         public int Id { get; set; }
-        public string UserName { get; set; }
+        public string Username { get; set; }
         public string Password { get; set; }
         public string RoleName { get; set; }
 

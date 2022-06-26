@@ -9,8 +9,8 @@ using SecretSantaAPI.Data;
 namespace SecretSantaAPI.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20220621123140_CreateInitial")]
-    partial class CreateInitial
+    [Migration("20220625095013_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -66,7 +66,7 @@ namespace SecretSantaAPI.Migrations
                     b.Property<string>("RoleName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UserName")
+                    b.Property<string>("Username")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");

@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SecretSantaAPI.Data;
@@ -18,19 +20,26 @@ namespace SecretSantaAPI.Controllers
         {
             _context = context;
         }
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<ActionResult<List<PairModel>>> Get()
         {
             return Ok(await _context.PairModels.ToListAsync());
         }
+
         // returns paired user y for user x
-        [HttpGet("/{x}")]
-        public async Task<ActionResult<int>> Get(int x)
+        [Authorize(Roles = "Admin,User")]
+        [HttpGet("{x}")]
+        public async Task<ActionResult<UserModel>> Get(int x)
         {
             var pair = await _context.PairModels.FirstOrDefaultAsync(req => req.X == x);
             if (pair == null) return BadRequest("0"); // no y for x
-            return Ok(pair.Y);
+            var paired = await _context.UserModels.FindAsync(pair.Y);
+            if (paired == null) return BadRequest("User doesn't exist");
+            return Ok(paired);
         }
+
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<ActionResult<List<PairModel>>> PostGeneratedPairs()
         {

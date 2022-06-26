@@ -6,6 +6,7 @@ using SecretSantaAPI.Data;
 using SecretSantaAPI.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System;
 
 namespace SecretSantaAPI.Controllers
 {
@@ -22,6 +23,21 @@ namespace SecretSantaAPI.Controllers
         public async Task<ActionResult<List<UserModel>>> Get()
         {
             return Ok(await _context.UserModels.ToListAsync());
+        }
+        [HttpGet("{id}")]
+        public async Task<ActionResult<UserModel>> GetUserFromId(int id)
+        {
+            var user = await _context.UserModels.FindAsync(id);
+            if (user == null) return BadRequest("No user found");
+            return Ok(user);
+        }
+        [HttpGet("byUsername/{name}")]
+        public async Task<ActionResult<UserModel>> GetUserFromId(string name)
+        {
+            var user = await _context.UserModels.FirstOrDefaultAsync(req => req.Username == name);
+            if (user == null) return BadRequest("0");
+
+            return Ok(user);
         }
         [HttpPost]
         public async Task<ActionResult<List<UserModel>>> AddUser(UserModel user)

@@ -1,0 +1,140 @@
+.container {
+    position: fixed;
+    top: 0;
+    left: 25%;
+    width: 50%;
+    height: 100%;
+    background: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container-inner {
+    width: 60%;
+    padding: 4rem 2rem;
+    border-radius: 0.8rem;
+    background: #1e2833;
+    box-shadow: 0.4rem 0.4rem 2.4rem 0.2rem hsl(236deg 50% 50% / 30%);
+    position: fixed;
+    top: 10%;
+    overflow: hidden;
+    z-index: 16;
+    color: white;
+}
+
+.container-inner .close-btn {
+    padding: 1rem 1.6rem;
+    border: 1px solid hsla(0, 0%, 100%, .4);
+    border-radius: 100rem;
+
+    color: inherit;
+    background: transparent;
+    font-size: 1.4rem;
+    font-family: inherit;
+    letter-spacing: .2rem;
+
+    transition: .2s;
+    cursor: pointer;
+}
+
+.details {
+    text-align: center;
+
+    margin-bottom: 4rem;
+    padding-bottom: 4rem;
+    border-bottom: 1px solid hsla(0, 0%, 100%, .4);
+}
+
+.title {
+    font-size: 3.2rem;
+}
+
+.description {
+    margin-top: 2rem;
+
+    font-size: 1.6rem;
+    font-style: italic;
+}
+
+.text-y {
+    padding: 0 4rem;
+    margin-bottom: 4rem;
+
+    font-size: 1.6rem;
+    line-height: 2;
+}
+
+.text-y::before {
+    content: '';
+
+    position: absolute;
+    top: 0%;
+    left: 100%;
+    transform: translate(-50%, -50%);
+
+    width: 18rem;
+    height: 18rem;
+    border: 1px solid hsla(0, 0%, 100%, .2);
+    border-radius: 100rem;
+
+    pointer-events: none;
+}
+
+.btn {
+    padding: 1rem 1.6rem;
+    border: 1px solid hsla(0, 0%, 100%, .4);
+    border-radius: 100rem;
+
+    color: inherit;
+    background: transparent;
+    font-size: 1.4rem;
+    font-family: inherit;
+    letter-spacing: .2rem;
+
+    transition: .2s;
+    cursor: pointer;
+}
+
+.btn:hover,
+.btn:focus {
+    border-color: hsla(0, 0%, 100%, .6);
+    transform: translateY(-.2rem);
+}
+
+.logout-btn {
+    width: 4rem;
+    height: 4rem;
+    border: 1px solid hsla(0, 0%, 100%, .4);
+    border-radius: 100rem;
+
+    color: inherit;
+    font-size: 2.2rem;
+
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    transition: .2s;
+}
+
+.logout-btn::before {
+    content: '×';
+    transform: translateY(-.1rem);
+}
+
+.logout-btn:hover,
+.logout-btn:focus {
+    border-color: hsla(0, 0%, 100%, .6);
+    transform: translateY(-.2rem);
+}
+
+table {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 20px;
+}
